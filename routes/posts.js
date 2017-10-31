@@ -3,6 +3,21 @@ var router = express.Router({mergeParams: true});
 
 var models  = require('../db/models');
 
+
+router.get('/search', function(req, res, next) {
+    console.log(req.query.term)
+    models.Post.findAll({
+        where: { 
+            title: {
+                $like: "%" + req.query.term + "%"
+            }
+        }
+    }).then((posts) => {
+        res.render('index', { posts: posts, term: req.query.term })
+    })
+});
+
+
 router.get('/new', function(req, res, next) {
    	res.render('posts-new', {})
 });
@@ -16,8 +31,6 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', (req,res) => {
-	req.body.UserId = req.params.id;
-
 	models.Post.create(req.body).then(post => {
 		res.redirect('/')
 	});

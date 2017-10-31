@@ -39,7 +39,7 @@ sequelize
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/users/:id/posts', posts);
+app.use('/posts', posts);
 app.use('/posts/:id/comments', comments);
 
 // catch 404 and forward to error handler
