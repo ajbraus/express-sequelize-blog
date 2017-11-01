@@ -5,7 +5,6 @@ var models  = require('../db/models');
 
 
 router.get('/search', function(req, res, next) {
-    console.log(req.query.term)
     models.Post.findAll({
         where: { 
             title: {
@@ -17,13 +16,12 @@ router.get('/search', function(req, res, next) {
     })
 });
 
-
 router.get('/new', function(req, res, next) {
    	res.render('posts-new', {})
 });
 
 router.get('/:id', function(req, res, next) {
-    models.Post.findById(req.params.id, {incude: ['Comment']}).then(post => {
+    models.Post.findById(req.params.id).then(post => {
         post.getComments().then(comments => {
             res.render('posts-show', {post: post, comments: comments})
         });

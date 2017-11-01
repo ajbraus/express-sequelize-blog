@@ -7,7 +7,7 @@ router.post('/', (req,res) => {
     req.body.PostId = req.params.id;
     
     models.Comment.create(req.body).then((comment) => {
-        res.redirect('/users/1/posts/' + req.params.id)
+        res.redirect('/posts/' + req.params.id)
     });
 });
 
