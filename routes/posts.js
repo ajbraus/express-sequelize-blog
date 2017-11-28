@@ -3,7 +3,6 @@ var router = express.Router({mergeParams: true});
 
 var models  = require('../db/models');
 
-
 router.get('/search', function(req, res, next) {
     models.Post.findAll({
         where: { 
@@ -30,7 +29,7 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', (req,res) => {
 	models.Post.create(req.body).then(post => {
-		res.redirect('/')
+		res.send({ post: post });
 	});
 });
 

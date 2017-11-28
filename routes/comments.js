@@ -6,7 +6,8 @@ var models  = require('../db/models');
 router.post('/', (req,res) => {
     req.body.PostId = req.params.id;
     
-    models.Comment.create(req.body).then((comment) => {
+    models.Comment.create(req.body).then((err, comment) => {
+        if (err) { return console.log(err) }
         res.redirect('/posts/' + req.params.id)
     });
 });
