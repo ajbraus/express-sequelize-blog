@@ -24,23 +24,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// const sequelize = new Sequelize('sample_blog_dev', 'adambraus', null, { dialect: 'postgres' });
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('sample_blog_dev', 'adambraus', null, { dialect: 'postgres' });
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+// sequelize
+//   .authenticate()
+//   .then(() => {
+//     console.log('Connection has been established successfully.');
+//   })
+//   .catch(err => {
+//     console.error('Unable to connect to the database:', err);
+//   });
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/posts', posts);
-app.use('/posts/:id/comments', comments);
+app.use('/posts/:postId/comments', comments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -19,10 +19,11 @@ router.get('/new', function(req, res, next) {
    	res.render('posts-new', {})
 });
 
+// SHOW
 router.get('/:id', function(req, res, next) {
     models.Post.findById(req.params.id).then(post => {
-        post.getComments().then(comments => {
-            res.render('posts-show', {post: post, comments: comments})
+        post.getComments({ order: [['createdAt', 'DESC']] }).then(comments => {
+            res.render('posts-show', { post: post, comments: comments})
         });
     });
 });

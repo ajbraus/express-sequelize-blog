@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
 
     Post.hasMany(models.Comment);
 
-    Publication.belongsToMany(models.Post, { through: 'Publication_Post' });
-    Post.belongsToMany(models.Publication, { through: 'Publication_Post' });
+    // Publication.belongsToMany(models.Post, { through: 'Publication_Post' });
+    // Post.belongsToMany(models.Publication, { through: 'Publication_Post' });
   };
 
   return Post;

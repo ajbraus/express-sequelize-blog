@@ -4,13 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
     bio: DataTypes.TEXT
-  }, {
-    classMethods: {
-      associate: function(models) {
-        User.hasMany(models.Post);
-      }
-    }
-  });
+  })
+
+  User.associate = function(models) {
+    User.hasMany(models.Post); // PostId
+  }
   
   return User;
 };
