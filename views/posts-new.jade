@@ -2,7 +2,7 @@ extends layout
 
 block content
     legend New Post
-    form#new-post
+    form(action="/posts" method="POST")#new-post
       label(for='title') Title
       input.form-control(type='text', name='title')
       br

@@ -1,18 +1,20 @@
-var express = require('express');
-var router = express.Router({mergeParams: true});
+const express = require('express');
+const router = express.Router({mergeParams: true});
+const Sequelize = require('sequelize');
+const op = Sequelize.Op;
 
-var models  = require('../db/models');
+const models  = require('../db/models');
 
-router.get('/search', function(req, res, next) {
+router.get('/search', (req, res, next) => {
     models.Post.findAll({
-        where: { 
+        where: {
             title: {
-                $like: "%" + req.query.term + "%"
+                [op.like]: `%${req.query.term}%`
             }
         }
     }).then((posts) => {
         res.render('index', { posts: posts, term: req.query.term })
-    })
+    });
 });
 
 router.get('/new', function(req, res, next) {
@@ -29,8 +31,9 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', (req,res) => {
+  console.log(req.body);
 	models.Post.create(req.body).then(post => {
-		res.send({ post: post });
+		res.redirect('/')
 	});
 });
 

@@ -6,12 +6,12 @@ var models  = require('../db/models');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 	models.User.findAll().then((users) => {
-   		res.render('users-index', { users: users })
+   	res.render('users-index', { users: users })
 	})
 });
 
 router.get('/new', function(req, res, next) {
-   	res.render('users-new', {})
+  res.render('users-new', {})
 });
 
 router.post('/', (req,res) => {
