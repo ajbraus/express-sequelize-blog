@@ -6,12 +6,12 @@ const op = Sequelize.Op;
 const models  = require('../db/models');
 
 // NEW
-router.get('/new', (req, res, next) => {
+router.get('/posts/new', (req, res, next) => {
    	res.render('posts-new', {})
 });
 
 // CREATE
-router.post('/', (req,res) => {
+router.post('/posts', (req,res) => {
   // RESOLVE PROMISES
 	models.Post.create(req.body) //=> RETURNS A PROMISE
     .then(post => {
@@ -32,7 +32,7 @@ router.post('/', (req,res) => {
 });
 
 // SHOW
-router.get('/:id', (req, res, next) => {
+router.get('/posts/:id', (req, res, next) => {
     models.Post.findById(req.params.id).then(post => {
         post.getComments({ order: [['createdAt', 'DESC']] }).then(comments => {
             res.render('posts-show', { post: post, comments: comments})
@@ -41,7 +41,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 // EDIT
-router.get('/:id/edit', (req, res, next) => {
+router.get('/posts/:id/edit', (req, res, next) => {
     models.Post.findById(req.params.id).then(post => {
         res.render('posts-edit', { post })
     });
@@ -49,7 +49,7 @@ router.get('/:id/edit', (req, res, next) => {
 
 
 // UPDATE
-router.put('/:id', (req, res, next) => {
+router.put('/posts/:id', (req, res, next) => {
     models.Post.findById(req.params.id).then(post => {
         post.update(req.body).then(post => {
             res.redirect(`/posts/${post.id}`); // => SHOW
@@ -61,7 +61,7 @@ router.put('/:id', (req, res, next) => {
 });
 
 // DESTROY
-router.delete('/:id', (req, res, next) => {
+router.delete('/posts/:id', (req, res, next) => {
     // models.Post.findById(req.params.id).then(post => {
     //     post.getComments({ order: [['createdAt', 'DESC']] }).then(comments => {
     //         res.render('posts-show', { post: post, comments: comments})

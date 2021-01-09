@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router({mergeParams: true});
+const express = require('express');
+const router = express.Router({mergeParams: true});
 
-var models  = require('../db/models');
+const models  = require('../db/models');
 
-router.post('/', (req,res) => {
+// CREATE COMMENT
+router.post('/posts/:postId/comments', (req,res) => {
     req.body.PostId = req.params.postId;
-    console.log(req.body)
-    
+
     models.Comment.create(req.body)
         .then(comment => {
             res.redirect('/posts/' + req.params.postId)

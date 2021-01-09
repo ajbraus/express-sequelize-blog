@@ -10,6 +10,11 @@ router.get('/', (req, res, next) => {
 	});
 });
 
+/* GET sign-up */
+router.get('/sign-up', (req, res, next) => {
+  res.render('sign-up', {})
+});
+
 /* GET Login. */
 router.get('/login', (req, res, next) => {
 	res.render('login');
