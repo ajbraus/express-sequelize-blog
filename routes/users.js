@@ -4,13 +4,13 @@ const router = express.Router();
 const models  = require('../db/models');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 	models.User.findAll().then((users) => {
    	res.render('users-index', { users: users })
 	})
 });
 
-router.get('/new', function(req, res, next) {
+router.get('/new', (req, res, next) => {
   res.render('users-new', {})
 });
 
