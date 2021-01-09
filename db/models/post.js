@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Post = sequelize.define('Post', {
+  const Post = sequelize.define('Post', {
     title: DataTypes.STRING,
     body: DataTypes.TEXT,
     UserId: DataTypes.INTEGER
@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Post.associate = function (models) {
     Post.belongsTo(models.User);
-
     Post.hasMany(models.Comment);
+
     // Publication.belongsToMany(models.Post, { through: 'Publication_Post' });
     // Post.belongsToMany(models.Publication, { through: 'Publication_Post' });
   };

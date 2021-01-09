@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Comment = sequelize.define('Comment', {
+  const Comment = sequelize.define('Comment', {
     body: DataTypes.TEXT,
     PostId: DataTypes.INTEGER
   });

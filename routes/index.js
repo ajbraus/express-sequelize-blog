@@ -1,22 +1,22 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var models  = require('../db/models');
+const models  = require('../db/models');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 	models.Post.findAll().then(posts => {
 		res.render('index', { posts: posts, term: "" });
 	});
 });
 
 /* GET Login. */
-router.get('/login', function(req, res, next) {
+router.get('/login', (req, res, next) => {
 	res.render('login');
 });
 
 /* POST Login. */
-router.post('/login', function(req, res, next) {
+router.post('/login', (req, res, next) => {
 	models.Post.findAll().then(posts => {
 		res.render('index', { posts: posts, term: "" });
 	});
