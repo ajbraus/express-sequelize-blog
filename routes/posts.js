@@ -5,20 +5,31 @@ const op = Sequelize.Op;
 
 const models  = require('../db/models');
 
-// INDEX
-router.post('/', (req,res) => {
-  console.log(req.body);
-	models.Post.create(req.body).then(post => {
-		res.redirect('/')
-	});
-});
-
 // NEW
 router.get('/new', function(req, res, next) {
    	res.render('posts-new', {})
 });
 
 // CREATE
+router.post('/', (req,res) => {
+  // RESOLVE PROMISES
+	models.Post.create(req.body) //=> RETURNS A PROMISE
+    .then(post => {
+      // IF PROMISE IS A SUCCESS (NO ERROR)
+  	  res.redirect(`/posts/${post.id}`);
+    })
+    .catch(err => {
+      // IF PROMISE IS AN ERROR
+      console.log(err);
+      // error message
+
+      
+
+      // generic error page
+      res.render('error-page');
+    });
+
+});
 
 // SHOW
 router.get('/:id', function(req, res, next) {
@@ -38,7 +49,6 @@ router.get('/:id/edit', function(req, res, next) {
 
 
 // UPDATE
-
 router.put('/:id', function(req, res, next) {
     models.Post.findById(req.params.id).then(post => {
         post.update(req.body).then(post => {
@@ -51,7 +61,6 @@ router.put('/:id', function(req, res, next) {
 });
 
 // DESTROY
-
 router.delete('/:id', function(req, res, next) {
     // models.Post.findById(req.params.id).then(post => {
     //     post.getComments({ order: [['createdAt', 'DESC']] }).then(comments => {
